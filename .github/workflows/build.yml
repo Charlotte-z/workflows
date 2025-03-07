@@ -7,18 +7,10 @@ jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger wikifactory-deploy deployment workflow
-        uses: wikifactory/wikifactory-actions/trigger_repo_workflow@2024_3_27-wait-for-repo
-        with:
-          token: ${{ secrets.PAT }}
-          author: Charlotte-z
-          repo: test-repo
-          eventType: custom-event-name
-          environment: staging
-          commitFrom: alpha
-          imageTag: master
-          backendGoTag: master
-          flaskTag: master
+      - name: test
+        run: |
+          result=$(curl -s https://www.instagram.com | grep -o '"X-IG-App-ID":"[0-9]*"')
+          echo "Extracted X-IG-App-ID: $result"
       # - name: Trigger another repository's workflow and wait for success
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用GitHub Secrets来引用PAT
